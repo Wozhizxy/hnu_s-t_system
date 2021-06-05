@@ -10,8 +10,16 @@
 ## 项目用到的技术栈有
 
 1. Node.js，express框架，mongoose
-3. 很简单的一些 html 和 css，样式大多用 Bootstrap 现成的
+2. 很简单的一些 html 和 css，样式大多用 Bootstrap 现成的
 3. 数据库用的mongodb，
+
+
+
+## 下一步更新计划
+
+1.把前端用react重写
+
+2.把后端代码优化。使用ajax等技术减少页面刷新次数。
 
 ### 关于mongodb
 
@@ -58,4 +66,5 @@
 
 ### 学生模块
 
-#### 老师模块
+### 老师模块
+
