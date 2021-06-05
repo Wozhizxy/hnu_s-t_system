@@ -1,0 +1,54 @@
+{{extend "./common/layout.html"}} {{block "body"}} {{include "./header.html"}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li >
+          <a href="/teacher">个人信息 </span></a>
+        </li>
+        <li class="active"><a href="/teacher/myStu?page=1">我的学生<span class="sr-only">(current)</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="sub-header">欢迎您，{{teacher.name}}({{teacher.course}})</h2>
+     
+      <div class="table-responsive" style="margin-top: 20px">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>学号</th>
+              <th>姓名</th>
+              <th>成绩</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{each mystu}}
+            <tr>
+              <td>{{$value.student.username}}</td>
+              <td>{{$value.student.name}}</td>
+              <td>{{$value.score>=0?$value.score:"未录入"}}</td>
+              <td>
+                <a
+                  class="btn btn-default"
+                  href="/teacher/setScore?id={{$value.student._id.toString()}}"
+                  role="button"
+                  >录入/修改成绩</a
+                >
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <%if(page > 1){%>
+        <a class="btn btn-default" href="/teacher/myStu?page=<%=page-1%>"><<</a>
+        <%}%> <% for(let i = 1; i <= total; i++){%>
+        <a class="btn btn-default" href="/teacher/myStu?page=<%= i %>"> <%= i %> </a>
+        <% } %> <%if(page < total){%>
+        <a class="btn btn-default" href="/teacher/myStu?page={{page+1}}">>></a>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+{{/block}}

@@ -1,0 +1,18 @@
+{
+  "name": "s-t-manager",
+  "version": "1.0.0",
+  "description": "教学管理系统，基本功能有信息登入、信息查看、学生老师管理。",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "author": "计科1802张学阳",
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "express": "^4.17.1",
+    "express-art-template": "^1.0.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^5.12.12"
+  }
+}

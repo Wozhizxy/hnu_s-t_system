@@ -1,0 +1,11 @@
+const { Router } = require("express");
+const student = Router();
+student.use("/", require("./student/check"));
+student.get("/", require("./student/index"));
+student.post("/login", require("./student/login"));
+student.get("/change", require("./student/change"));
+student.post("/change", require("./student/pchange"));
+student.get("/mycourse", require("./student/course"));
+student.get("/changeCourse", require("./student/change_c"));
+student.post("/changeCourse", require("./student/pchange_c"));
+module.exports = student;

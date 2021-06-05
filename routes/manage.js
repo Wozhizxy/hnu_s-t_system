@@ -1,0 +1,21 @@
+const { Router } = require("express");
+const manager = Router();
+const login = require("./manager/login");
+const { deleteStudent, deleteTeacher } = require("./manager/delete");
+
+manager.use("/", require("./manager/check"));
+manager.get("/", require("./manager/index"));
+manager.get("/addStudent", require("./manager/student_edit"));
+manager.get("/showTeacher", require("./manager/show_teacher"));
+manager.get("/editTeacher", require("./manager/teacher_edit"));
+manager.get("/updateStudent", require("./manager/student_update"));
+manager.get("/showSC", require("./manager/sc_show"));
+manager.get("/updateTeacher", require("./manager/teacher_update"));
+manager.get("/deleteStudent", deleteStudent);
+manager.get("/deleteTeacher", deleteTeacher);
+manager.post("/login", login);
+manager.post("/addStudent", require("./manager/post_add"));
+manager.post("/addTeacher", require("./manager/teacher_add"));
+manager.post("/updateStudent", require("./manager/student_pupdate"));
+manager.post("/updateTeacher", require("./manager/teacher_pupdate"));
+module.exports = manager;

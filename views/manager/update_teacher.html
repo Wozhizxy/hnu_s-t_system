@@ -1,0 +1,111 @@
+{{extend "./common/layout.html"}} {{block "body"}} {{include "./header.html"}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li>
+          <a href="/manager?page=1">学生信息 </a>
+        </li>
+        <li class="active">
+          <a href="/manager/showTeacher?page=1"
+            >老师信息<span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li><a href="/manager/showSC?page=1">选课情况</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="sub-header">修改老师信息</h2>
+      <div class="table-responsive">
+        <p style="color: red">{{if msg}}waring:{{msg}}{{/if}}</p>
+        <form action="#" method="POST" id="addTeacherForm">
+          <div class="form-group">
+            <label for="username">职工号(5位)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              value="{{teacher.username}}"
+              readonly=true
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="name"
+              value="{{teacher.name}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              value="{{teacher.password}}"
+            />
+          </div>
+        <div class="form-group">
+          <label for="course">教授课程</label>
+          <input
+            type="text"
+            class="form-control"
+            id="course"
+            name="course"
+            value="{{teacher.course}}"
+            readonly=true
+          />
+          <button type="submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+        </form>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/block}} {{block "script"}}
+<script>
+  $("#addTeacherForm").on("submit", function () {
+    function serializeToJson(form) {
+      const result = {};
+      const f = form.serializeArray();
+      // console.log("F:", f);
+
+      f.forEach((item) => {
+        result[item.name] = item.value;
+      });
+      return result;
+    }
+    const teacher = serializeToJson($(this));
+    const { username, password, name, course } = teacher;
+    // if (!username.test(/^[0-9]{12}/g)) {
+    //   alert("学号必须为12位数字");
+    //   return false;
+    // }
+    const reg = /[0-9]{5}/;
+    if (!reg.test(username)) {
+      alert("职工号为5位数字");
+      return false;
+    }
+    if (name.trim().length === 0) {
+      alert("姓名不能为空");
+      return false;
+    }
+    if (password.trim().length === 0) {
+      alert("密码不能为空");
+      return false;
+    }
+    if (course.trim().length === 0) {
+      alert("请输入有效的课程名");
+      return false;
+    }
+    $(this).attr("action", "/manager/updateTeacher?id={{teacher._id.toString()}}");
+    return true;
+  });
+</script>
+{{/block}}

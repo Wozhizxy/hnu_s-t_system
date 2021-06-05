@@ -1,0 +1,11 @@
+const { Router } = require("express");
+const teacher = Router();
+teacher.use("/", require("./teacher/check"));
+teacher.get("/", require("./teacher/index"));
+teacher.post("/login", require("./teacher/login"));
+teacher.get("/change", require("./teacher/change"));
+teacher.post("/change", require("./teacher/pchange"));
+teacher.get("/myStu", require("./teacher/showstu"));
+teacher.get("/setScore", require("./teacher/score"));
+teacher.post("/setScore", require("./teacher/pscore"));
+module.exports = teacher;

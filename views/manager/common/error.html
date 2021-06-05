@@ -1,0 +1,9 @@
+{{extend "./layout.html"}} {{block "body"}}
+<h4>{{msg}}</h4>
+{{/block}} {{block "script"}}
+<script>
+  setTimeout(() => {
+    location.href = "/";
+  }, 5000);
+</script>
+{{/block}}

@@ -1,0 +1,58 @@
+{{extend './common/layout.html'}} {{block 'body'}} {{include './header.html'}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active">
+          <a href="/teacher">我的信息 <span class="sr-only">(current)</span></a>
+        </li>
+        <li><a href="/teacher/myStu?page=1">我的学生</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="sub-header">
+        欢迎您，{{teacher.name}}({{teacher.course}})
+      </h2>
+      <h4 style="color: skyblue;">修改密码</h4>
+      <div class="table-responsive" style="margin-top: 20px">
+        <form action="#" method="POST" id="changePassword">
+            <div class="form-group">
+              <label>请输入新密码</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                value="{{teacher.password}}"
+                style="width: 500px;"
+              />
+            </div>
+            <button class="btn btn-default">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/block}} {{block "script"}}
+<script>
+  $("#changePassword").on("submit", function () {
+    function serializeToJson(form) {
+      const result = {};
+      const f = form.serializeArray();
+      // console.log("F:", f);
+
+      f.forEach((item) => {
+        result[item.name] = item.value;
+      });
+      return result;
+    }
+    const stu = serializeToJson($(this));
+    const { password} = stu;
+    if (password.trim().length === 0) {
+      alert("密码不能为空");
+      return false;
+    }
+    $(this).attr("action", "/teacher/change?id={{teacher._id.toString()}}");
+    return true;
+  });
+</script>
+{{/block}}

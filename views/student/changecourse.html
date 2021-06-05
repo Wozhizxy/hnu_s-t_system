@@ -1,0 +1,49 @@
+{{extend "./common/layout.html"}} {{block "body"}} {{include "./header.html"}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li >
+          <a href="/student">个人信息</span></a>
+        </li>
+        <li class="active"><a href="/student/myscore">我的选课 <span class="sr-only">(current)</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="sub-header">
+        欢迎您，{{user.username?user.username:"未登录"}}
+      </h2>
+      <a
+        href="/student/changeCourse?id={{student._id.toString()}}"
+        class="btn btn-default"
+        >修改选课</a
+      >
+      <div class="table-responsive" style="margin-top: 20px">
+        <form action="/student/changeCourse" method="POST" id="updateStudentForm">
+        <div class="form-group">
+            {{each teachers}} {{if checked.includes($value.course)}}
+            <label class="checkbox-inline"
+              ><input
+                type="checkbox"
+                name="courses"
+                value="{{$value.course}}"
+                checked
+              />{{$value.course}}({{$value.name}})</label
+            >
+            {{else}}
+            <label class="checkbox-inline"
+              ><input
+                type="checkbox"
+                name="courses"
+                value="{{$value.course}}"
+              />{{$value.course}}({{$value.name}})</label
+            >
+            {{/if}} {{/each}}
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{/block}}

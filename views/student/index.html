@@ -1,0 +1,49 @@
+{{extend "./common/layout.html"}} {{block "body"}} {{include "./header.html"}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active">
+          <a href="/student">个人信息 <span class="sr-only">(current)</span></a>
+        </li>
+        <li><a href="/student/mycourse">我的选课</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2 class="sub-header">
+        欢迎您，{{user.username?user.username:"未登录"}}
+      </h2>
+      <a
+        href="/student/change?id={{student._id.toString()}}"
+        class="btn btn-default"
+        >修改密码</a
+      >
+      <div class="table-responsive" style="margin-top: 20px">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>学号</td>
+              <td>{{student.username}}</td>
+            </tr>
+            <tr>
+              <td>姓名</td>
+              <td>{{student.name}}</td>
+            </tr>
+            <tr>
+              <td>密码</td>
+              <td>
+                <input
+                  type="password"
+                  readonly="true"
+                  value="{{student.password}}"
+                  class="form-control"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{/block}}
